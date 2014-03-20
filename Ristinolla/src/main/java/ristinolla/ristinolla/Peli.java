@@ -25,7 +25,6 @@ public class Peli extends JFrame implements ActionListener {
     JButton[] ruudut;
     public int laskuri = 0;
     public int merkit = 0;
-    public boolean voitto = false;
     public int nykyinenPelaaja = 1;
 
     public Peli() {
@@ -73,12 +72,13 @@ public class Peli extends JFrame implements ActionListener {
         for (JButton ruutu : ruudut) {
             if (ruutu == e.getSource()) {
                 if (merkit % 2 == 0) {
-                    ruutu.setFont(new Font("Dialog",1,30));
+                    ruutu.setFont(new Font("Dialog",Font.BOLD,30));
                     ruutu.setText("X");
                     ruutu.setBackground(Color.blue);
+
                     ruutu.setEnabled(false);
                 } else {
-                    ruutu.setFont(new Font("Dialog",1,30));
+                    ruutu.setFont(new Font("Dialog",Font.BOLD,30));
                     ruutu.setText("O");
                     ruutu.setBackground(Color.red);
                     ruutu.setEnabled(false);
@@ -96,12 +96,12 @@ public class Peli extends JFrame implements ActionListener {
 
  /**
  *
- * Palautetaan totuusarvona pelin voittaja.
+ * Palautetaan pelin voittaja.
  */
     
-    public boolean tarkistaVoittaja() {
+    public int tarkistaVoittaja() {
 
-        return true;
+        return 0;
 
     }
     
