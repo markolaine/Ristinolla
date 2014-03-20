@@ -1,13 +1,13 @@
 package ristinolla.ristinolla;
 
 /**
- * Hello world!
  *
+ * @author markolai@cs
  */
-public class Ristinolla 
-{
+public class Ristinolla {
+    
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        Peli peli = new Peli();
     }
 }
