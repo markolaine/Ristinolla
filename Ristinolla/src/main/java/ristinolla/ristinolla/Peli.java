@@ -36,7 +36,7 @@ public class Peli extends JFrame implements ActionListener {
 
     /**
      *
-     * Pelilaudan alustus ja pelin luonti.
+     * Pelilaudan alustus ja pelin luonti. laala
      */
     public void uusiPeli() {
 
