@@ -102,9 +102,9 @@ public class RistinollaTest {
     }
 
     @Test
-    public void pelaaNumero1Aloittaa() {
+    public void ristiAloittaa() {
 
-        Assert.assertEquals(1, testipeli.nykyinenPelaaja);
+        Assert.assertEquals(0, testipeli.merkit%2);
     }
 
 }
