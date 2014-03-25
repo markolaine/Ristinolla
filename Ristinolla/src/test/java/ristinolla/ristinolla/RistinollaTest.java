@@ -74,14 +74,14 @@ public class RistinollaTest {
 
     }
 
-    @Test
-    public void nollautuukoVarit() {
-
-        Color alussa = testipeli.ruudut[0].getBackground();
-        testipeli.peliLoppui();
-        Assert.assertEquals(alussa, testipeli.ruudut[0].getBackground());
-
-    }
+//    @Test
+//    public void nollautuukoVarit() {
+//
+//        Color alussa = testipeli.ruudut[0].getBackground();
+//        testipeli.peliLoppui();
+//        Assert.assertEquals(alussa, testipeli.ruudut[0].getBackground());
+//
+//    }
 
     @Test
     public void nollautuukoRuutujenTekstit() {

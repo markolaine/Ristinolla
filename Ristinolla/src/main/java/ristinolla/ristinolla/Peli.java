@@ -100,7 +100,7 @@ public class Peli extends JFrame implements ActionListener {
         }
 
         if (voittikoPelaaja() == false && laskuri == ruudut.length) {
-            JOptionPane.showMessageDialog(null, "Peli loppui tasapeliin." + uusiRivi + "Ristin voitot: "+ ristinVoitot+". Nollan voitot: "+nollanVoitot+".", "Nolla voitti!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Peli loppui tasapeliin." + uusiRivi + "Ristin voitot: "+ ristinVoitot+". Nollan voitot: "+nollanVoitot+".", "Tasapeli!", JOptionPane.INFORMATION_MESSAGE);
             peliLoppui();
         }
         merkit++;
