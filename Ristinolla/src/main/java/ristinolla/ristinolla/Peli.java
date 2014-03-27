@@ -1,19 +1,9 @@
 package ristinolla.ristinolla;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  *
