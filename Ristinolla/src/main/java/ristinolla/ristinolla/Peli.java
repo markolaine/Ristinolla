@@ -39,7 +39,8 @@ public class Peli extends JFrame implements ActionListener {
      * Pelilaudan alustus ja pelin luonti.
      */
     public void uusiPeli() {
-
+        
+        
         pelilauta = new JPanel();
         pelilauta.setLayout(new GridLayout(3, 3));
         this.add(pelilauta);
@@ -63,6 +64,7 @@ public class Peli extends JFrame implements ActionListener {
         this.setSize(500, 500);
         Dimension ruudunKoko = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(ruudunKoko.width / 2 - this.getSize().width / 2, ruudunKoko.height / 2 - this.getSize().height / 2);
+        
     }
 
     @Override
