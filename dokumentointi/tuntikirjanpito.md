@@ -1,3 +1,4 @@
 Tuntikirjanpito
 13.3.2014 1h Aiheen valinta, projektin ja git-repositorion valmistelu.
 20.3.2014 5h Peli pyörii, ei vielä toiminnallisuuksia.
+27.3.2013 4h Toiminnallisuudet kunnossa, peli päättyy voittoon tai tasapeliin ja pelaajien voitoista pidetään kirjaa. Pelaajia informoidaan tilanteesta voiton ja pelien suhteen. Voi jatkaa pelaamista uudella pelillä.
