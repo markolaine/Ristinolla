@@ -25,12 +25,12 @@ public class RistinollaTest {
     public static void tearDownClass() throws Exception {
     }
 
-    private Peli testipeli;
+    private Logiikka testipeli;
 
     @Before
     public void setUp() {
 
-        testipeli = new Peli();
+        testipeli = new Logiikka();
         testipeli.uusiPeli();
 
     }
