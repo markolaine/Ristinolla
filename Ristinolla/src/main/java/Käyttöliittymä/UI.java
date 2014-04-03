@@ -156,7 +156,7 @@ public class UI implements Runnable, ActionListener{
 
     /**
 *
-* Logiikkan loppuessa kysytään jatketaanko pelaamista.
+* Pelin loppuessa kysytään jatketaanko pelaamista.
 */
     public void peliLoppui() {
 
