@@ -21,7 +21,11 @@ public class UI implements Runnable, ActionListener {
     public JButton[] ruudut;
     public JPanel pelilauta;
 
-
+    /**
+     *
+     * Graafisen käyttöliittymän asetukset kuntoon.
+     *
+     */
     public UI(Logiikka peli) {
 
         this.peli = peli;

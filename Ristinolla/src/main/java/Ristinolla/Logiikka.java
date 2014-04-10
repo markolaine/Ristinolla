@@ -9,26 +9,24 @@ import javax.swing.*;
  */
 public final class Logiikka extends JFrame {
 //    public JButton[] ruudut;
-    static int laskuri = 0;
-    static int merkit = 0;
+
+    public static int laskuri = 0;
+    public static int merkit = 0;
     static String uusiRivi = System.lineSeparator();
     static int ristinVoitot;
     static int nollanVoitot;
-
-    private static void alustaPelilauta(JButton[] ruudut) {
-        for (JButton ruutu : ruudut) {
-            ruutu.setText("");
-            ruutu.setBackground(Color.GRAY);
-            ruutu.setEnabled(true);
-        }
-        laskuri = 0;
-        merkit = 0;
-    }
 
     public Logiikka() {
 
     }
 
+    /**
+     *
+     * Kasvatetaan laskuria ja asetetaan ruutuun vuorossa olevan pelaajan risti
+     * tai nolla pelimerkki.
+     *
+     * @param ruutu
+     */
     public static void asetaMerkkiRuutuun(JButton ruutu, JButton[] ruudut) {
 
         laskuri++;
@@ -43,6 +41,14 @@ public final class Logiikka extends JFrame {
         }
     }
 
+    /**
+     *
+     * Päivitetään pelitilanne tarkistamalla, jatkuuko peli, ja jos toinen
+     * pelaaja on voittanut tai peli on päättynyt tasapeliin ilmoitetaan
+     * tilanteesta, muutoin jatketaan.
+     *
+     * @param ruudut
+     */
     public static void paivita(JButton[] ruudut) {
 
         tulikoTasapeli(ruudut, laskuri);
@@ -62,6 +68,12 @@ public final class Logiikka extends JFrame {
         merkit++;
     }
 
+    /**
+     *
+     * Tarkistetaan onko peli loppunut tasapeliin pelialustan täytyttyä ennen
+     * kummankaan voittoa.
+     *
+     */
     private static void tulikoTasapeli(JButton[] ruudut, int merkit) {
 
         if (voittikoPelaaja(ruudut) == false && laskuri == ruudut.length) {
@@ -140,8 +152,8 @@ public final class Logiikka extends JFrame {
 
     /**
      *
-     * Pelin loppuessa voittoon tai tasapeliin kysytään käyttäjältä jatketaanko
-     * pelaamista ja joko alustetaan pelilauta tai lopetetaan.
+     * Pelin loppuessa (voittoon tai tasapeliin) kysytään käyttäjältä
+     * jatketaanko pelaamista ja joko alustetaan pelilauta tai lopetetaan.
      *
      * @param ruudut
      */
@@ -158,6 +170,21 @@ public final class Logiikka extends JFrame {
             System.exit(0);
         }
 
+    }
+
+    /**
+     *
+     * Alustetaan pelilauta uudelleen ja apumuuttujat uutta peliä varten.
+     *
+     */
+    private static void alustaPelilauta(JButton[] ruudut) {
+        for (JButton ruutu : ruudut) {
+            ruutu.setText("");
+            ruutu.setBackground(Color.GRAY);
+            ruutu.setEnabled(true);
+        }
+        laskuri = 0;
+        merkit = 0;
     }
 
 }
