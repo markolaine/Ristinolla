@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
-import Ristinolla.Logiikka;
+import ristinolla.ristinolla.Logiikka;
 
 /**
  *
@@ -25,6 +25,7 @@ public class UI implements Runnable, ActionListener {
      *
      * Graafisen käyttöliittymän asetukset kuntoon.
      *
+     * @param peli
      */
     public UI(Logiikka peli) {
 
@@ -67,10 +68,10 @@ public class UI implements Runnable, ActionListener {
 
         for (JButton ruutu : ruudut) {
             if (ruutu == e.getSource()) {
-                Ristinolla.Logiikka.asetaMerkkiRuutuun(ruutu, ruudut);
+                ristinolla.ristinolla.Logiikka.asetaMerkkiRuutuun(ruutu, ruudut);
             }
         }
-        Ristinolla.Logiikka.paivita(ruudut);
+        ristinolla.ristinolla.Logiikka.paivita(ruudut);
     }
 
 }

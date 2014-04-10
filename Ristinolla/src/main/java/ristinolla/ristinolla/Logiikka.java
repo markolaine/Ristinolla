@@ -1,4 +1,4 @@
-package Ristinolla;
+package ristinolla.ristinolla;
 
 import java.awt.Color;
 import javax.swing.*;
