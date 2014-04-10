@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
-import ristinolla.ristinolla.Logiikka;
+import Ristinolla.Logiikka;
 
 /**
  *
@@ -20,10 +20,7 @@ public class UI implements Runnable, ActionListener {
     public JFrame UI = new JFrame();
     public JButton[] ruudut;
     public JPanel pelilauta;
-    public int ristinVoitot;
-    public int nollanVoitot;
-    private int laskuri;
-    private int merkit;
+
 
     public UI(Logiikka peli) {
 
@@ -66,10 +63,10 @@ public class UI implements Runnable, ActionListener {
 
         for (JButton ruutu : ruudut) {
             if (ruutu == e.getSource()) {
-                ristinolla.ristinolla.Logiikka.asetaMerkkiRuutuun(ruutu, ruudut);
+                Ristinolla.Logiikka.asetaMerkkiRuutuun(ruutu, ruudut);
             }
         }
-        ristinolla.ristinolla.Logiikka.paivita(ruudut, laskuri);
+        Ristinolla.Logiikka.paivita(ruudut);
     }
 
 }

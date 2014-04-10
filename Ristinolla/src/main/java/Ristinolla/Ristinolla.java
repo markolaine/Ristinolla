@@ -1,4 +1,4 @@
-package ristinolla.ristinolla;
+package Ristinolla;
 
 import Käyttöliittymä.UI;
 import javax.swing.*;
