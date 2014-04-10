@@ -1,4 +1,4 @@
-package ristinolla;
+package ristinollaTest;
 
 import ristinolla.Logiikka;
 import java.awt.Color;

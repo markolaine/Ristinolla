@@ -9,13 +9,25 @@ import javax.swing.JFrame;
  */
 public final class Logiikka extends JFrame {
 
+    private int[] pelialusta = new int[9];
+    
     static int laskuri = 0;
     static int merkit = 0;
     static int ristinVoitot;
     static int nollanVoitot;
 
     public Logiikka() {
+        
+        uusiPeli();
 
+    }
+    
+    public void uusiPeli() {
+        
+        for (int i = 0; i < pelialusta.length; i++) {
+            this.pelialusta[i] = 0;
+        }
+        
     }
 
     /**
@@ -79,13 +91,13 @@ public final class Logiikka extends JFrame {
 
     }
 
-    private static void ristiVoitti(JButton[] ruudut) {
+    public static void ristiVoitti(JButton[] ruudut) {
         ristinVoitot++;
         ui.UI.ilmoitaRistinVoitto();
         peliLoppui(ruudut);
     }
 
-    private static void nollaVoitti(JButton[] ruudut) {
+    public static void nollaVoitti(JButton[] ruudut) {
         nollanVoitot++;
         ui.UI.ilmoitaNollanVoitto();
         peliLoppui(ruudut);
@@ -164,6 +176,16 @@ public final class Logiikka extends JFrame {
     public static int getNollanVoitot() {
 
         return nollanVoitot;
+    }
+    
+    public static int getMerkit() {
+        
+        return merkit;
+    }
+    
+    public static int getLaskuri() {
+        
+        return laskuri;
     }
 
     /**
