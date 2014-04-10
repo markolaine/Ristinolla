@@ -64,26 +64,12 @@ public class UI implements Runnable, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        laskuri++;
         for (JButton ruutu : ruudut) {
             if (ruutu == e.getSource()) {
-                
                 ristinolla.ristinolla.Logiikka.asetaMerkkiRuutuun(ruutu, ruudut);
-//                if (merkit % 2 == 0) {
-//                    ruutu.setText("X");
-//                    ruutu.setBackground(Color.blue);
-//                    ruutu.setEnabled(false);
-//                } else {
-//                    ruutu.setText("O");
-//                    ruutu.setBackground(Color.red);
-//                    ruutu.setEnabled(false);
-//                }
             }
         }
-
         ristinolla.ristinolla.Logiikka.paivita(ruudut, laskuri);
-
-//        merkit++;
     }
 
 }

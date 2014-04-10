@@ -10,15 +10,34 @@ import javax.swing.*;
 public final class Logiikka extends JFrame {
 //       public JButton[] ruudut;
 
-    static int laskuri;
-    static int merkit;
+    static int laskuri = 0;
+    static int merkit = 0;
     static String uusiRivi = System.lineSeparator();
     static int ristinVoitot;
     static int nollanVoitot;
-    
+
     public Logiikka() {
+
+    }
+
+    public static void asetaMerkkiRuutuun(JButton ruutu, JButton[] ruudut) {
         
-        merkit = 0;
+        laskuri++;
+        if (merkit % 2 == 0) {
+            ruutu.setText("X");
+            ruutu.setBackground(Color.blue);
+            ruutu.setEnabled(false);
+        } else {
+            ruutu.setText("O");
+            ruutu.setBackground(Color.red);
+            ruutu.setEnabled(false);
+        }
+    }
+    
+    public static void paivita2(JButton[] ruudut, int laskuri) {
+        
+        
+        
     }
 
     public static void paivita(JButton[] ruudut, int laskuri) {
@@ -121,6 +140,7 @@ public final class Logiikka extends JFrame {
 
         JDialog.setDefaultLookAndFeelDecorated(true);
         int valinta;
+
         valinta = JOptionPane.showConfirmDialog(null, "Pelataanko uusi peli?", "Peli loppui",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (valinta == JOptionPane.YES_OPTION) {
@@ -135,19 +155,6 @@ public final class Logiikka extends JFrame {
             System.exit(0);
         }
 
-    }
-
-    public static void asetaMerkkiRuutuun(JButton ruutu, JButton[] ruudut) {
-
-        if (merkit % 2 == 0) {
-            ruutu.setText("X");
-            ruutu.setBackground(Color.blue);
-            ruutu.setEnabled(false);
-        } else {
-            ruutu.setText("O");
-            ruutu.setBackground(Color.red);
-            ruutu.setEnabled(false);
-        }
     }
 
 }
