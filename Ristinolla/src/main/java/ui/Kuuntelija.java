@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import ristinolla.Logiikka;
-import ui.UI;
 
 /**
  *

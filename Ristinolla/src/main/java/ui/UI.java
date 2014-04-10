@@ -13,7 +13,7 @@ import ristinolla.Logiikka;
  *
  * @author marlai
  */
-public class UI implements Runnable{
+public class UI implements Runnable {
 
     public Logiikka peli;
     public JFrame UI = new JFrame();
@@ -54,7 +54,7 @@ public class UI implements Runnable{
 
             ruudut[i] = new JButton();
             pelilauta.add(ruudut[i]);
-            ruudut[i].addActionListener(new Kuuntelija(this.UI,this.peli, ruudut[i], ruudut));
+            ruudut[i].addActionListener(new Kuuntelija(this.UI, this.peli, ruudut[i], ruudut));
             ruudut[i].setBorder(BorderFactory.createLineBorder(Color.CYAN, 1));
             ruudut[i].setFont(new Font("Dialog", Font.BOLD, 30));
         }
@@ -62,8 +62,7 @@ public class UI implements Runnable{
         alustaPeli(ruudut);
     }
 
-    
-     /**
+    /**
      *
      * Alustetaan peliruudut uutta peliä varten.
      *
@@ -77,8 +76,7 @@ public class UI implements Runnable{
         }
     }
 
-
-     /**
+    /**
      *
      * Maalataan valittu ruutu ja estetään klikkaaminen uudestaan.
      *

@@ -4,9 +4,9 @@ import ui.UI;
 import javax.swing.*;
 
 /**
-*
-* @author markolai@cs
-*/
+ *
+ * @author markolai@cs
+ */
 public class Ristinolla {
 
     public static void main(String[] args) {

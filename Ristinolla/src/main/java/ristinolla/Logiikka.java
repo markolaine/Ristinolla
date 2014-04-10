@@ -3,7 +3,6 @@ package ristinolla;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-
 /**
  *
  * @author markolai@cs
@@ -25,6 +24,7 @@ public final class Logiikka extends JFrame {
      * tai nolla pelimerkki.
      *
      * @param ruutu
+     * @param ruudut
      */
     public void asetaMerkkiRuutuun(JButton ruutu, JButton[] ruudut) {
 
