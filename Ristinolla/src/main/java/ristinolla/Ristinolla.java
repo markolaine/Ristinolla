@@ -1,6 +1,6 @@
-package ristinolla.ristinolla;
+package ristinolla;
 
-import Käyttöliittymä.UI;
+import ui.UI;
 import javax.swing.*;
 
 /**

@@ -2,24 +2,24 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Käyttöliittymä;
+package ui;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
-import ristinolla.ristinolla.Logiikka;
+import ristinolla.Logiikka;
 
 /**
  *
  * @author marlai
  */
-public class UI implements Runnable, ActionListener {
+public class UI implements Runnable{
 
     public Logiikka peli;
     public JFrame UI = new JFrame();
     public JButton[] ruudut;
     public JPanel pelilauta;
+    static final String uusiRivi = System.lineSeparator();
 
     /**
      *
@@ -54,52 +54,47 @@ public class UI implements Runnable, ActionListener {
 
             ruudut[i] = new JButton();
             pelilauta.add(ruudut[i]);
-            ruudut[i].setEnabled(true);
-            ruudut[i].addActionListener(this);
-            ruudut[i].setBackground(Color.DARK_GRAY);
+            ruudut[i].addActionListener(new Kuuntelija(this.UI,this.peli, ruudut[i], ruudut));
             ruudut[i].setBorder(BorderFactory.createLineBorder(Color.CYAN, 1));
             ruudut[i].setFont(new Font("Dialog", Font.BOLD, 30));
-
         }
+
+        alustaPeli(ruudut);
     }
 
+    
+     /**
+     *
+     * Alustetaan peliruudut uutta peliä varten.
+     *
+     * @param ruudut
+     */
     public static void alustaPeli(JButton[] ruudut) {
         for (JButton ruutu : ruudut) {
             ruutu.setText("");
-            ruutu.setBackground(Color.GRAY);
+            ruutu.setBackground(Color.DARK_GRAY);
             ruutu.setEnabled(true);
         }
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
 
-        for (JButton ruutu : ruudut) {
-            if (ruutu == e.getSource()) {
-                ristinolla.ristinolla.Logiikka.asetaMerkkiRuutuun(ruutu, ruudut);
-            }
+     /**
+     *
+     * Maalataan valittu ruutu ja estetään klikkaaminen uudestaan.
+     *
+     * @param ruutu
+     * @param merkki
+     */
+    public static void maalaaRuutu(JButton ruutu, String merkki) {
+
+        ruutu.setEnabled(false);
+
+        if (merkki.equals("X")) {
+            ruutu.setBackground(Color.blue);
+        } else {
+
+            ruutu.setBackground(Color.red);
         }
-        ristinolla.ristinolla.Logiikka.paivita(ruudut);
-    }
-
-    /**
-     * Värjätään ruutu, johon risti asetettiin siniseksi.
-     *
-     * @param ruutu
-     */
-    public static void ristiAsetettu(JButton ruutu) {
-        ruutu.setBackground(Color.blue);
-        ruutu.setEnabled(false);
-    }
-
-    /**
-     * Värjätään ruutu, johon nolla asetettiin punaiseksi.
-     *
-     * @param ruutu
-     */
-    public static void nollaAsetettu(JButton ruutu) {
-        ruutu.setBackground(Color.red);
-        ruutu.setEnabled(false);
     }
 
     /**
@@ -110,7 +105,6 @@ public class UI implements Runnable, ActionListener {
     public static void ilmoitaTasapeli() {
         JOptionPane.showMessageDialog(null, "Peli loppui tasapeliin." + uusiRivi + "Ristin voitot: " + Logiikka.getRistinVoitot() + ". Nollan voitot: " + Logiikka.getNollanVoitot() + ".", "Tasapeli!", JOptionPane.INFORMATION_MESSAGE);
     }
-    static String uusiRivi = System.lineSeparator();
 
     /**
      *
@@ -130,11 +124,11 @@ public class UI implements Runnable, ActionListener {
         JOptionPane.showMessageDialog(null, "Nollaa pelannut voitti." + uusiRivi + uusiRivi + "Ristin voitot: " + Logiikka.getRistinVoitot() + ". Nollan voitot: " + Logiikka.getNollanVoitot() + ".", "Nolla voitti!", JOptionPane.INFORMATION_MESSAGE);
     }
 
-     /**
+    /**
      *
      * Kysytäänkö käyttäjältä pelataanko lisää.
      *
-     * @return 
+     * @return
      */
     public static boolean pelataankoLisaa() {
 

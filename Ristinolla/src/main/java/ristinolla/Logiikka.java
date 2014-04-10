@@ -1,18 +1,17 @@
-package ristinolla.ristinolla;
+package ristinolla;
 
-import java.awt.Color;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
 
 /**
  *
  * @author markolai@cs
  */
 public final class Logiikka extends JFrame {
-//    public JButton[] ruudut;
 
-    public static int laskuri = 0;
-    public static int merkit = 0;
-    static String uusiRivi = System.lineSeparator();
+    static int laskuri = 0;
+    static int merkit = 0;
     static int ristinVoitot;
     static int nollanVoitot;
 
@@ -27,16 +26,15 @@ public final class Logiikka extends JFrame {
      *
      * @param ruutu
      */
-    public static void asetaMerkkiRuutuun(JButton ruutu, JButton[] ruudut) {
+    public void asetaMerkkiRuutuun(JButton ruutu, JButton[] ruudut) {
 
         laskuri++;
         if (merkit % 2 == 0) {
             ruutu.setText("X");
-            Käyttöliittymä.UI.ristiAsetettu(ruutu);
         } else {
             ruutu.setText("O");
-            Käyttöliittymä.UI.nollaAsetettu(ruutu);
         }
+        ui.UI.maalaaRuutu(ruutu, ruutu.getText());
     }
 
     /**
@@ -47,13 +45,13 @@ public final class Logiikka extends JFrame {
      *
      * @param ruudut
      */
-    public static void paivita(JButton[] ruudut) {
-        
+    public void paivita(JButton[] ruudut) {
+
         int kumpiVoitti = merkit % 2;
         merkit++;
 
         if (tulikoTasapeli(ruudut, laskuri)) {
-            Käyttöliittymä.UI.ilmoitaTasapeli();
+            ui.UI.ilmoitaTasapeli();
             peliLoppui(ruudut);
         }
 
@@ -83,13 +81,13 @@ public final class Logiikka extends JFrame {
 
     private static void ristiVoitti(JButton[] ruudut) {
         ristinVoitot++;
-        Käyttöliittymä.UI.ilmoitaRistinVoitto();
+        ui.UI.ilmoitaRistinVoitto();
         peliLoppui(ruudut);
     }
 
     private static void nollaVoitti(JButton[] ruudut) {
         nollanVoitot++;
-        Käyttöliittymä.UI.ilmoitaNollanVoitto();
+        ui.UI.ilmoitaNollanVoitto();
         peliLoppui(ruudut);
     }
 
@@ -177,7 +175,7 @@ public final class Logiikka extends JFrame {
      */
     public static void peliLoppui(JButton[] ruudut) {
 
-        if (Käyttöliittymä.UI.pelataankoLisaa()) {
+        if (ui.UI.pelataankoLisaa()) {
             alustaPelilauta(ruudut);
         } else {
             System.exit(0);
@@ -194,7 +192,7 @@ public final class Logiikka extends JFrame {
 
         laskuri = 0;
         merkit = 0;
-        Käyttöliittymä.UI.alustaPeli(ruudut);
+        ui.UI.alustaPeli(ruudut);
 
     }
 
