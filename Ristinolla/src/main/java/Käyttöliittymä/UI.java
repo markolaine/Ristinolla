@@ -63,6 +63,14 @@ public class UI implements Runnable, ActionListener {
         }
     }
 
+    public static void alustaPeli(JButton[] ruudut) {
+        for (JButton ruutu : ruudut) {
+            ruutu.setText("");
+            ruutu.setBackground(Color.GRAY);
+            ruutu.setEnabled(true);
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -72,6 +80,75 @@ public class UI implements Runnable, ActionListener {
             }
         }
         ristinolla.ristinolla.Logiikka.paivita(ruudut);
+    }
+
+    /**
+     * Värjätään ruutu, johon risti asetettiin siniseksi.
+     *
+     * @param ruutu
+     */
+    public static void ristiAsetettu(JButton ruutu) {
+        ruutu.setBackground(Color.blue);
+        ruutu.setEnabled(false);
+    }
+
+    /**
+     * Värjätään ruutu, johon nolla asetettiin punaiseksi.
+     *
+     * @param ruutu
+     */
+    public static void nollaAsetettu(JButton ruutu) {
+        ruutu.setBackground(Color.red);
+        ruutu.setEnabled(false);
+    }
+
+    /**
+     *
+     * Ilmoitetaan käyttäjälle tasapelista.
+     *
+     */
+    public static void ilmoitaTasapeli() {
+        JOptionPane.showMessageDialog(null, "Peli loppui tasapeliin." + uusiRivi + "Ristin voitot: " + Logiikka.getRistinVoitot() + ". Nollan voitot: " + Logiikka.getNollanVoitot() + ".", "Tasapeli!", JOptionPane.INFORMATION_MESSAGE);
+    }
+    static String uusiRivi = System.lineSeparator();
+
+    /**
+     *
+     * Ilmoitetaan käyttäjälle ristin voitosta.
+     *
+     */
+    public static void ilmoitaRistinVoitto() {
+        JOptionPane.showMessageDialog(null, "Ristiä pelannut voitti." + uusiRivi + uusiRivi + "Ristin voitot: " + Logiikka.getRistinVoitot() + ". Nollan voitot: " + Logiikka.getNollanVoitot() + ".", "Risti voitti!", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    /**
+     *
+     * Ilmoitetaan käyttäjälle nollan voitosta.
+     *
+     */
+    public static void ilmoitaNollanVoitto() {
+        JOptionPane.showMessageDialog(null, "Nollaa pelannut voitti." + uusiRivi + uusiRivi + "Ristin voitot: " + Logiikka.getRistinVoitot() + ". Nollan voitot: " + Logiikka.getNollanVoitot() + ".", "Nolla voitti!", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+     /**
+     *
+     * Kysytäänkö käyttäjältä pelataanko lisää.
+     *
+     * @return 
+     */
+    public static boolean pelataankoLisaa() {
+
+        JDialog.setDefaultLookAndFeelDecorated(true);
+        int valinta;
+
+        valinta = JOptionPane.showConfirmDialog(null, "Pelataanko uusi peli?", "Peli loppui",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (valinta == JOptionPane.YES_OPTION) {
+            return true;
+        } else if (valinta == JOptionPane.CLOSED_OPTION) {
+            return false;
+        }
+        return false;
     }
 
 }

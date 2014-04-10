@@ -32,12 +32,10 @@ public final class Logiikka extends JFrame {
         laskuri++;
         if (merkit % 2 == 0) {
             ruutu.setText("X");
-            ruutu.setBackground(Color.blue);
-            ruutu.setEnabled(false);
+            Käyttöliittymä.UI.ristiAsetettu(ruutu);
         } else {
             ruutu.setText("O");
-            ruutu.setBackground(Color.red);
-            ruutu.setEnabled(false);
+            Käyttöliittymä.UI.nollaAsetettu(ruutu);
         }
     }
 
@@ -50,12 +48,18 @@ public final class Logiikka extends JFrame {
      * @param ruudut
      */
     public static void paivita(JButton[] ruudut) {
+        
+        int kumpiVoitti = merkit % 2;
+        merkit++;
 
-        tulikoTasapeli(ruudut, laskuri);
+        if (tulikoTasapeli(ruudut, laskuri)) {
+            Käyttöliittymä.UI.ilmoitaTasapeli();
+            peliLoppui(ruudut);
+        }
 
         if (voittikoPelaaja(ruudut)) {
 
-            if (merkit % 2 == 0) {
+            if (kumpiVoitti == 0) {
 
                 ristiVoitti(ruudut);
 
@@ -64,8 +68,6 @@ public final class Logiikka extends JFrame {
                 nollaVoitti(ruudut);
             }
         }
-
-        merkit++;
     }
 
     /**
@@ -74,24 +76,20 @@ public final class Logiikka extends JFrame {
      * kummankaan voittoa.
      *
      */
-    private static void tulikoTasapeli(JButton[] ruudut, int merkit) {
-
-        if (voittikoPelaaja(ruudut) == false && laskuri == ruudut.length) {
-            JOptionPane.showMessageDialog(null, "Peli loppui tasapeliin." + uusiRivi + "Ristin voitot: " + ristinVoitot + ". Nollan voitot: " + nollanVoitot + ".", "Tasapeli!", JOptionPane.INFORMATION_MESSAGE);
-            peliLoppui(ruudut);
-        }
+    private static boolean tulikoTasapeli(JButton[] ruudut, int laskuri) {
+        return voittikoPelaaja(ruudut) == false && laskuri == ruudut.length;
 
     }
 
     private static void ristiVoitti(JButton[] ruudut) {
         ristinVoitot++;
-        JOptionPane.showMessageDialog(null, "Ristiä pelannut voitti." + uusiRivi + uusiRivi + "Ristin voitot: " + ristinVoitot + ". Nollan voitot: " + nollanVoitot + ".", "Risti voitti!", JOptionPane.INFORMATION_MESSAGE);
+        Käyttöliittymä.UI.ilmoitaRistinVoitto();
         peliLoppui(ruudut);
     }
 
     private static void nollaVoitti(JButton[] ruudut) {
         nollanVoitot++;
-        JOptionPane.showMessageDialog(null, "Nollaa pelannut voitti." + uusiRivi + uusiRivi + "Ristin voitot: " + ristinVoitot + ". Nollan voitot: " + nollanVoitot + ".", "Nolla voitti!", JOptionPane.INFORMATION_MESSAGE);
+        Käyttöliittymä.UI.ilmoitaNollanVoitto();
         peliLoppui(ruudut);
     }
 
@@ -151,6 +149,26 @@ public final class Logiikka extends JFrame {
     }
 
     /**
+     * Palautetaan ristiä pelaavan pelaajan voittojen määrä.
+     *
+     * @return
+     */
+    public static int getRistinVoitot() {
+
+        return ristinVoitot;
+    }
+
+    /**
+     * Palautetaan nollaa pelaavan pelaajan voittojen määrä.
+     *
+     * @return
+     */
+    public static int getNollanVoitot() {
+
+        return nollanVoitot;
+    }
+
+    /**
      *
      * Pelin loppuessa (voittoon tai tasapeliin) kysytään käyttäjältä
      * jatketaanko pelaamista ja joko alustetaan pelilauta tai lopetetaan.
@@ -159,32 +177,25 @@ public final class Logiikka extends JFrame {
      */
     public static void peliLoppui(JButton[] ruudut) {
 
-        JDialog.setDefaultLookAndFeelDecorated(true);
-        int valinta;
-
-        valinta = JOptionPane.showConfirmDialog(null, "Pelataanko uusi peli?", "Peli loppui",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (valinta == JOptionPane.YES_OPTION) {
+        if (Käyttöliittymä.UI.pelataankoLisaa()) {
             alustaPelilauta(ruudut);
-        } else if (valinta == JOptionPane.CLOSED_OPTION) {
+        } else {
             System.exit(0);
         }
-
     }
 
     /**
      *
      * Alustetaan pelilauta uudelleen ja apumuuttujat uutta peliä varten.
      *
+     * @param ruudut
      */
-    private static void alustaPelilauta(JButton[] ruudut) {
-        for (JButton ruutu : ruudut) {
-            ruutu.setText("");
-            ruutu.setBackground(Color.GRAY);
-            ruutu.setEnabled(true);
-        }
+    public static void alustaPelilauta(JButton[] ruudut) {
+
         laskuri = 0;
         merkit = 0;
+        Käyttöliittymä.UI.alustaPeli(ruudut);
+
     }
 
 }
