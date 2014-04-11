@@ -17,12 +17,12 @@ public class Kuuntelija implements ActionListener {
     private JButton ruutu;
     private final JButton[] ruudut;
 
-    public Kuuntelija(UI ui, Logiikka peli, JButton ruutu, JButton[] ruudut) {
-        this.ui = ui;
-        this.peli = peli;
-        this.ruutu = ruutu;
-        this.ruudut = ruudut;
-    }
+//    public Kuuntelija(UI ui, Logiikka peli, JButton ruutu, JButton[] ruudut) {
+//        this.ui = ui;
+//        this.peli = peli;
+//        this.ruutu = ruutu;
+//        this.ruudut = ruudut;
+//    }
 
     public Kuuntelija(JFrame UI, Logiikka peli, JButton jButton, JButton[] ruudut) {
         this.peli = peli;
