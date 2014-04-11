@@ -49,20 +49,34 @@ public class LogiikkaTest {
 
     @Test
     public void ristiAloittaa() {
-        
-        Assert.assertEquals(0, testipeli.getMerkit()%2);
+
+        Assert.assertEquals(0, testipeli.getMerkit() % 2);
     }
-    
-   @Test
+
+    @Test
+    public void ristiAloittaa2() {
+
+        Assert.assertEquals("X", testipeli.getPelivuorossa());
+    }
+
+    @Test
     public void laskuriAluksiNolla() {
-        
+
         Assert.assertEquals(0, testipeli.getLaskuri());
     }
-    
-     @Test
+
+    @Test
     public void merkitAluksiNolla() {
-        
+
         Assert.assertEquals(0, testipeli.getMerkit());
     }
-    
+
+    @Test
+    public void ruudutAluksiNull() {
+
+        Assert.assertEquals(null, testipeli.getRuudunMerkki(0));
+        Assert.assertEquals(null, testipeli.getRuudunMerkki(6));
+        Assert.assertEquals(null, testipeli.getRuudunMerkki(8));
+    }
+
 }

@@ -9,25 +9,37 @@ import javax.swing.JFrame;
  */
 public final class Logiikka extends JFrame {
 
-    private int[] pelialusta = new int[9];
-    
+    private static String[] pelialusta = new String[9];
+
     static int laskuri = 0;
     static int merkit = 0;
     static int ristinVoitot;
     static int nollanVoitot;
 
     public Logiikka() {
-        
+
         uusiPeli();
 
     }
-    
+
     public void uusiPeli() {
-        
+
         for (int i = 0; i < pelialusta.length; i++) {
-            this.pelialusta[i] = 0;
+            this.pelialusta[i] = null;
         }
-        
+
+    }
+
+    public void asetaMerkkiRuutuunUusi(int i) {
+
+        laskuri++;
+        if (merkit % 2 == 0) {
+            pelialusta[i] = "X";
+        } else {
+            pelialusta[i] = "0";
+        }
+
+//        ui.UI.maalaaRuutu(ruutu, ruutu.getText());
     }
 
     /**
@@ -57,6 +69,8 @@ public final class Logiikka extends JFrame {
      *
      * @param ruudut
      */
+    
+
     public void paivita(JButton[] ruudut) {
 
         int kumpiVoitti = merkit % 2;
@@ -177,15 +191,30 @@ public final class Logiikka extends JFrame {
 
         return nollanVoitot;
     }
-    
+
     public static int getMerkit() {
-        
+
         return merkit;
     }
-    
+
     public static int getLaskuri() {
-        
+
         return laskuri;
+    }
+
+    public static String getPelivuorossa() {
+
+        if (merkit % 2 == 0) {
+
+            return "X";
+        }
+        return "0";
+
+    }
+    
+    public String getRuudunMerkki(int ruutu) {
+        
+        return pelialusta[ruutu];
     }
 
     /**

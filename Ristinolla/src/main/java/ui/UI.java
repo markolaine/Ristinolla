@@ -54,6 +54,7 @@ public class UI implements Runnable {
 
             ruudut[i] = new JButton();
             pelilauta.add(ruudut[i]);
+//          ruudut[i].addActionListener(new Kuuntelija(this, this.peli));
             ruudut[i].addActionListener(new Kuuntelija(this.UI, this.peli, ruudut[i], ruudut));
             ruudut[i].setBorder(BorderFactory.createLineBorder(Color.CYAN, 1));
             ruudut[i].setFont(new Font("Dialog", Font.BOLD, 30));
@@ -75,6 +76,19 @@ public class UI implements Runnable {
             ruutu.setEnabled(true);
         }
     }
+    
+    public void paivita() {
+        
+        for (int i = 0; i < ruudut.length; i++) {
+            
+            if (peli.getRuudunMerkki(i) == "X" || peli.getRuudunMerkki(i) == "0") {
+                
+                maalaaRuutu(ruudut[i], peli.getRuudunMerkki(i));
+            }
+            
+        }
+    }
+    
 
     /**
      *
@@ -86,6 +100,7 @@ public class UI implements Runnable {
     public static void maalaaRuutu(JButton ruutu, String merkki) {
 
         ruutu.setEnabled(false);
+        ruutu.setText(merkki);
 
         if (merkki.equals("X")) {
             ruutu.setBackground(Color.blue);
