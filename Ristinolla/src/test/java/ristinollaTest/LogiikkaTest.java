@@ -49,26 +49,20 @@ public class LogiikkaTest {
 
     @Test
     public void ristiAloittaa() {
-
-        Assert.assertEquals(0, testipeli.getMerkit() % 2);
-    }
-
-    @Test
-    public void ristiAloittaa2() {
-
+        testipeli.asetaMerkkiRuutuun(0);
         Assert.assertEquals("X", testipeli.getPelivuorossa());
-    }
-
-    @Test
-    public void laskuriAluksiNolla() {
-
-        Assert.assertEquals(0, testipeli.getLaskuri());
     }
 
     @Test
     public void merkitAluksiNolla() {
 
-        Assert.assertEquals(0, testipeli.getMerkit());
+        Assert.assertEquals(0, testipeli.pelivuoro);
+    }
+
+    @Test
+    public void pelivuoroAluksiNolla() {
+
+        Assert.assertEquals(0, testipeli.pelivuoro);
     }
 
     @Test
@@ -79,4 +73,93 @@ public class LogiikkaTest {
         Assert.assertEquals(null, testipeli.getRuudunMerkki(8));
     }
 
+    @Test
+    public void ruudunMerkkiPalautetaanOikein() {
+
+        int ruutu1 = 0;
+        int ruutu2 = 1;
+
+        testipeli.asetaMerkkiRuutuun(ruutu1);
+        testipeli.asetaMerkkiRuutuun(ruutu2);
+
+        Assert.assertEquals("X", testipeli.getRuudunMerkki(ruutu1));
+        Assert.assertEquals("0", testipeli.getRuudunMerkki(ruutu2));
+    }
+
+    @Test
+    public void toimiikoTasapeli() {
+
+        testipeli.asetaMerkkiRuutuun(0);
+        testipeli.asetaMerkkiRuutuun(1);
+        testipeli.asetaMerkkiRuutuun(3);
+        testipeli.asetaMerkkiRuutuun(4);
+        testipeli.asetaMerkkiRuutuun(7);
+        testipeli.asetaMerkkiRuutuun(6);
+        testipeli.asetaMerkkiRuutuun(2);
+        testipeli.asetaMerkkiRuutuun(5);
+        testipeli.asetaMerkkiRuutuun(8);
+        testipeli.tarkistaLoppuiko();
+
+        Assert.assertEquals(true, testipeli.tasapeli);
+
+    }
+
+    @Test
+    public void toimiikoRistinVoitto() {
+
+        testipeli.asetaMerkkiRuutuun(0);
+        testipeli.asetaMerkkiRuutuun(1);
+        testipeli.asetaMerkkiRuutuun(3);
+        testipeli.asetaMerkkiRuutuun(4);
+        testipeli.asetaMerkkiRuutuun(6);
+        testipeli.tarkistaLoppuiko();
+
+        Assert.assertEquals(0, testipeli.getNollanVoitot());
+        Assert.assertEquals(1, testipeli.getRistinVoitot());
+
+    }
+
+    @Test
+    public void toimiikoNollanVoitto() {
+
+        testipeli.asetaMerkkiRuutuun(0);
+        testipeli.asetaMerkkiRuutuun(1);
+        testipeli.asetaMerkkiRuutuun(3);
+        testipeli.asetaMerkkiRuutuun(4);
+        testipeli.asetaMerkkiRuutuun(2);
+        testipeli.asetaMerkkiRuutuun(7);
+        testipeli.tarkistaLoppuiko();
+
+        Assert.assertEquals(0, testipeli.getRistinVoitot());
+        Assert.assertEquals(1, testipeli.getNollanVoitot());
+
+    }
+
+    @Test
+    public void uusiPeliToimii() {
+
+        int ruutu1 = 0;
+        int ruutu2 = 1;
+
+        testipeli.asetaMerkkiRuutuun(ruutu1);
+        testipeli.asetaMerkkiRuutuun(ruutu2);
+        testipeli.uusiPeli();
+
+        Assert.assertEquals(null, testipeli.getRuudunMerkki(ruutu1));
+        Assert.assertEquals(null, testipeli.getRuudunMerkki(ruutu2));
+
+    }
+    
+
+    @Test
+    public void voittojenResetointiToimii() {
+        
+        testipeli.kasvataVoittoja("X");
+        testipeli.kasvataVoittoja("0");
+        
+        testipeli.resetoiVoitot();
+        
+        Assert.assertEquals(0, testipeli.getRistinVoitot());
+        Assert.assertEquals(0, testipeli.getNollanVoitot());
+    }
 }

@@ -1,45 +1,48 @@
 package ristinolla;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-
 /**
  *
  * @author markolai@cs
  */
-public final class Logiikka extends JFrame {
+public final class Logiikka {
 
-    private static String[] pelialusta = new String[9];
+    public final String[] pelialusta;
 
-    static int laskuri = 0;
-    static int merkit = 0;
-    static int ristinVoitot;
-    static int nollanVoitot;
+    public int pelivuoro;
+    private int ristinVoitot;
+    private int nollanVoitot;
+    public boolean tasapeli;
+    public boolean pelaajaVoitti;
+    public String voittaja;
 
     public Logiikka() {
 
-        uusiPeli();
+        this.pelialusta = new String[9];
 
     }
 
+    /**
+     *
+     * Alustetaan pelilauta uudelleen ja apumuuttujat uutta peliä varten.
+     *
+     */
     public void uusiPeli() {
 
         for (int i = 0; i < pelialusta.length; i++) {
-            this.pelialusta[i] = null;
+            pelialusta[i] = null;
         }
+
+        pelivuoro = 0;
+        tasapeli = false;
+        pelaajaVoitti = false;
+        voittaja = null;
 
     }
-
-    public void asetaMerkkiRuutuunUusi(int i) {
-
-        laskuri++;
-        if (merkit % 2 == 0) {
-            pelialusta[i] = "X";
-        } else {
-            pelialusta[i] = "0";
-        }
-
-//        ui.UI.maalaaRuutu(ruutu, ruutu.getText());
+    
+    public void resetoiVoitot() {
+        
+        ristinVoitot = 0;
+        nollanVoitot = 0;
     }
 
     /**
@@ -47,51 +50,42 @@ public final class Logiikka extends JFrame {
      * Kasvatetaan laskuria ja asetetaan ruutuun vuorossa olevan pelaajan risti
      * tai nolla pelimerkki.
      *
-     * @param ruutu
-     * @param ruudut
+     * @param i
      */
-    public void asetaMerkkiRuutuun(JButton ruutu, JButton[] ruudut) {
+    public void asetaMerkkiRuutuun(int i) {
+        
+        pelivuoro++;
 
-        laskuri++;
-        if (merkit % 2 == 0) {
-            ruutu.setText("X");
-        } else {
-            ruutu.setText("O");
+        if (pelialusta[i] != null) {
+            throw new IllegalArgumentException("Ruutu on jo pelattu.");
         }
-        ui.UI.maalaaRuutu(ruutu, ruutu.getText());
+        
+        if ("X".equals(getPelivuorossa())) {
+            
+            pelialusta[i] = "X";
+        } else if ("0".equals(getPelivuorossa())) {
+            pelialusta[i] = "0";
+        }
+        
+
     }
 
-    /**
-     *
-     * Päivitetään pelitilanne tarkistamalla, jatkuuko peli, ja jos toinen
-     * pelaaja on voittanut tai peli on päättynyt tasapeliin ilmoitetaan
-     * tilanteesta, muutoin jatketaan.
-     *
-     * @param ruudut
-     */
-    
+    public void tarkistaLoppuiko() {
 
-    public void paivita(JButton[] ruudut) {
+        voittikoPelaaja();
 
-        int kumpiVoitti = merkit % 2;
-        merkit++;
+        if (voittaja != null) {
 
-        if (tulikoTasapeli(ruudut, laskuri)) {
-            ui.UI.ilmoitaTasapeli();
-            peliLoppui(ruudut);
+            pelaajaVoitti = true;
+
+            kasvataVoittoja(getPelivuorossa());
+
+        }
+        
+            if (tulikoTasapeli()) {
+            tasapeli = true;
         }
 
-        if (voittikoPelaaja(ruudut)) {
-
-            if (kumpiVoitti == 0) {
-
-                ristiVoitti(ruudut);
-
-            } else {
-
-                nollaVoitti(ruudut);
-            }
-        }
     }
 
     /**
@@ -99,22 +93,12 @@ public final class Logiikka extends JFrame {
      * Tarkistetaan onko peli loppunut tasapeliin pelialustan täytyttyä ennen
      * kummankaan voittoa.
      *
+     * @return
      */
-    private static boolean tulikoTasapeli(JButton[] ruudut, int laskuri) {
-        return voittikoPelaaja(ruudut) == false && laskuri == ruudut.length;
+    public boolean tulikoTasapeli() {
 
-    }
+        return (voittaja == null) && pelivuoro == pelialusta.length;
 
-    public static void ristiVoitti(JButton[] ruudut) {
-        ristinVoitot++;
-        ui.UI.ilmoitaRistinVoitto();
-        peliLoppui(ruudut);
-    }
-
-    public static void nollaVoitti(JButton[] ruudut) {
-        nollanVoitot++;
-        ui.UI.ilmoitaNollanVoitto();
-        peliLoppui(ruudut);
     }
 
     /**
@@ -122,53 +106,50 @@ public final class Logiikka extends JFrame {
      * Tarkistetaan onko kumpikaan pelaajista voittanut peliä viimeisimmällä
      * siirrollaan.
      *
-     * @param ruudut
-     * @return
      */
-    public static boolean voittikoPelaaja(JButton[] ruudut) {
+    public void voittikoPelaaja() {
 
-        if (merkit >= 3) {
+        if (pelivuoro >= 5) {
 
             for (int i = 0; i < 3; i++) {
 
-                if (ruudut[i].isEnabled() == false) {
-                    String verrattava = ruudut[i].getText();
-                    if (verrattava.equals(ruudut[i + 3].getText()) && verrattava.equals(ruudut[i + 6].getText())) {
+                if (pelialusta[i] != null) {
+                    String verrattava = pelialusta[i];
+                    if (verrattava.equals(pelialusta[i + 3]) && verrattava.equals(pelialusta[i + 6])) {
 
-                        return true;
+                        voittaja = verrattava;
                     }
                 }
             }
 
             for (int i = 0; i < 9; i += 3) {
 
-                if (ruudut[i].isEnabled() == false) {
-                    String verrattava = ruudut[i].getText();
-                    if (verrattava.equals(ruudut[i + 1].getText()) && verrattava.equals(ruudut[i + 2].getText())) {
+                if (pelialusta[i] != null) {
+                    String verrattava = pelialusta[i];
+                    if (verrattava.equals(pelialusta[i + 1]) && verrattava.equals(pelialusta[i + 2])) {
 
-                        return true;
+                        voittaja = verrattava;
                     }
                 }
             }
 
-            if (ruudut[0].isEnabled() == false) {
-                String verrattava = ruudut[0].getText();
-                if (verrattava.equals(ruudut[4].getText()) && verrattava.equals(ruudut[8].getText())) {
+            if (pelialusta[0] != null) {
+                String verrattava = pelialusta[0];
+                if (verrattava.equals(pelialusta[4]) && verrattava.equals(pelialusta[8])) {
 
-                    return true;
+                    voittaja = verrattava;
                 }
             }
 
-            if (ruudut[2].isEnabled() == false) {
-                String verrattava = ruudut[2].getText();
-                if (verrattava.equals(ruudut[4].getText()) && verrattava.equals(ruudut[6].getText())) {
+            if (pelialusta[2] != null) {
+                String verrattava = pelialusta[2];
+                if (verrattava.equals(pelialusta[4]) && verrattava.equals(pelialusta[6])) {
 
-                    return true;
+                    voittaja = verrattava;
                 }
             }
 
         }
-        return false;
 
     }
 
@@ -177,7 +158,7 @@ public final class Logiikka extends JFrame {
      *
      * @return
      */
-    public static int getRistinVoitot() {
+    public int getRistinVoitot() {
 
         return ristinVoitot;
     }
@@ -187,64 +168,31 @@ public final class Logiikka extends JFrame {
      *
      * @return
      */
-    public static int getNollanVoitot() {
+    public int getNollanVoitot() {
 
         return nollanVoitot;
     }
 
-    public static int getMerkit() {
+    public String getPelivuorossa() {
 
-        return merkit;
-    }
-
-    public static int getLaskuri() {
-
-        return laskuri;
-    }
-
-    public static String getPelivuorossa() {
-
-        if (merkit % 2 == 0) {
+        if (pelivuoro % 2 != 0) {
 
             return "X";
         }
         return "0";
 
     }
-    
+
     public String getRuudunMerkki(int ruutu) {
-        
+
         return pelialusta[ruutu];
     }
 
-    /**
-     *
-     * Pelin loppuessa (voittoon tai tasapeliin) kysytään käyttäjältä
-     * jatketaanko pelaamista ja joko alustetaan pelilauta tai lopetetaan.
-     *
-     * @param ruudut
-     */
-    public static void peliLoppui(JButton[] ruudut) {
-
-        if (ui.UI.pelataankoLisaa()) {
-            alustaPelilauta(ruudut);
-        } else {
-            System.exit(0);
+    public void kasvataVoittoja(String pelivuorossa) {
+        if ("X".equals(pelivuorossa)) {
+            ristinVoitot++;
+        } else if ("0".equals(pelivuorossa)) {
+            nollanVoitot++;
         }
     }
-
-    /**
-     *
-     * Alustetaan pelilauta uudelleen ja apumuuttujat uutta peliä varten.
-     *
-     * @param ruudut
-     */
-    public static void alustaPelilauta(JButton[] ruudut) {
-
-        laskuri = 0;
-        merkit = 0;
-        ui.UI.alustaPeli(ruudut);
-
-    }
-
 }
