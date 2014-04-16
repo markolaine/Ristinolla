@@ -12,13 +12,11 @@ import ristinolla.Logiikka;
  */
 public class UI implements Runnable {
 
-    public Logiikka peli;
-    public JFrame UI = new JFrame();
-    public static JButton[] ruudut;
-    public JPanel pelilauta;
-    static final String uusiRivi = System.lineSeparator();
-    int ristinVoitot;
-    int nollanVoitot;
+    private final Logiikka peli;
+    private final JFrame UI = new JFrame();
+    private JButton[] ruudut;
+    private JPanel pelilauta;
+    private final String uusiRivi = System.lineSeparator();
     private JLabel pelivuorossa;
 
     /**
@@ -86,7 +84,7 @@ public class UI implements Runnable {
         JPanel alareuna = new JPanel();
         GridLayout alareunaL = new GridLayout(1, 3);
         alareuna.setLayout(alareunaL);
-        this.pelivuorossa = new JLabel("Nyt pelaa: " + peli.getPelivuorossa());
+        this.pelivuorossa = new JLabel("Pelivuorossa: X");
         this.pelivuorossa.setHorizontalAlignment(JLabel.LEFT);
         alareuna.add(this.pelivuorossa);
 
@@ -121,6 +119,10 @@ public class UI implements Runnable {
         }
 
         paivitaVoitto();
+        if ("X".equals(peli.getPelivuorossa())) {
+            this.pelivuorossa.setText("Pelivuorossa: 0");
+        } else { this.pelivuorossa.setText("Pelivuorossa: X");
+        }
     }
 
     public void paivitaVoitto() {
@@ -161,7 +163,7 @@ public class UI implements Runnable {
      * @param ruutu
      * @param merkki
      */
-    public static void maalaaRuutu(JButton ruutu, String merkki) {
+    public void maalaaRuutu(JButton ruutu, String merkki) {
 
         ruutu.setEnabled(false);
         ruutu.setText(merkki);
@@ -180,7 +182,7 @@ public class UI implements Runnable {
      *
      * @return
      */
-    public static boolean pelataankoLisaa() {
+    public boolean pelataankoLisaa() {
 
         JDialog.setDefaultLookAndFeelDecorated(true);
         int valinta;

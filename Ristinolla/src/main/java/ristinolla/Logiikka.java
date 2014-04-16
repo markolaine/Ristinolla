@@ -8,7 +8,7 @@ public final class Logiikka {
 
     public final String[] pelialusta;
 
-    public int pelivuoro;
+    private int pelivuoro;
     private int ristinVoitot;
     private int nollanVoitot;
     public boolean tasapeli;
@@ -186,6 +186,11 @@ public final class Logiikka {
     public String getRuudunMerkki(int ruutu) {
 
         return pelialusta[ruutu];
+    }
+    
+    public int getPelivuoro() {
+        
+        return pelivuoro;
     }
 
     public void kasvataVoittoja(String pelivuorossa) {

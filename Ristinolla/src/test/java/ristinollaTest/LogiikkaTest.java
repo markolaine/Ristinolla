@@ -56,13 +56,13 @@ public class LogiikkaTest {
     @Test
     public void merkitAluksiNolla() {
 
-        Assert.assertEquals(0, testipeli.pelivuoro);
+        Assert.assertEquals(0, testipeli.getPelivuoro());
     }
 
     @Test
     public void pelivuoroAluksiNolla() {
 
-        Assert.assertEquals(0, testipeli.pelivuoro);
+        Assert.assertEquals(0, testipeli.getPelivuoro());
     }
 
     @Test
