@@ -34,7 +34,9 @@ public class Kuuntelija implements ActionListener {
             this.peli.uusiPeli();
             this.ui.nollaaPelilauta();
         } else if (komento.equals("UUSIPELIJAVOITOT")) {
+            this.peli.uusiPeli();
             this.peli.resetoiVoitot();
+            this.ui.nollaaPelilauta();
         } else if (komento.equals("LOPETA")) {
             System.exit(0);
         } else {

@@ -6,13 +6,12 @@ package ristinolla;
  */
 public final class Logiikka {
 
-    public final String[] pelialusta;
+    private final String[] pelialusta;
 
     private int pelivuoro;
     private int ristinVoitot;
     private int nollanVoitot;
     public boolean tasapeli;
-    private boolean pelaajaVoitti;
     private String voittaja;
 
     public Logiikka() {
@@ -23,7 +22,7 @@ public final class Logiikka {
 
     /**
      *
-     * Alustetaan pelilauta uudelleen ja apumuuttujat uutta peliä varten.
+     * Alustetaan pelilauta ja apumuuttujat uutta peliä varten.
      *
      */
     public void uusiPeli() {
@@ -34,7 +33,6 @@ public final class Logiikka {
 
         this.pelivuoro = 0;
         this.tasapeli = false;
-        this.pelaajaVoitti = false;
         this.voittaja = null;
 
     }
@@ -75,8 +73,6 @@ public final class Logiikka {
 
         if (this.voittaja != null) {
 
-            this.pelaajaVoitti = true;
-
             kasvataVoittoja(this.getPelivuorossa());
 
         }
@@ -104,9 +100,9 @@ public final class Logiikka {
 
         return this.voittaja != null;
     }
-    
+
     public boolean loppuiko() {
-        
+
         return loppuikoTasapeliin() || loppuikoVoittoon();
     }
 
@@ -165,7 +161,7 @@ public final class Logiikka {
     private void kasvataVoittoja(String pelivuorossa) {
         if ("X".equals(pelivuorossa)) {
             this.ristinVoitot++;
-        } else if ("0".equals(pelivuorossa)) {
+        } else {
             this.nollanVoitot++;
         }
     }

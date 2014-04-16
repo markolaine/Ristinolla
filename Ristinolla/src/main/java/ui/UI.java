@@ -16,7 +16,6 @@ public class UI implements Runnable {
     private final JFrame UI = new JFrame();
     private JButton[] ruudut;
     private JPanel pelilauta;
-    private final String uusiRivi = System.lineSeparator();
     private JLabel pelivuorossa;
 
     /**
@@ -26,6 +25,8 @@ public class UI implements Runnable {
      * @param peli
      */
     public UI(Logiikka peli) {
+
+        JOptionPane.showMessageDialog(null, "Kahden pelaajan ristinolla, x aloittaa!", "Ristinolla", JOptionPane.INFORMATION_MESSAGE);
 
         this.peli = peli;
         UI.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -56,6 +57,13 @@ public class UI implements Runnable {
         uusiPeli.setActionCommand("UUSIPELI");
         uusiPeli.addActionListener(new Kuuntelija(this, this.peli));
         menu.add(uusiPeli);
+        menu.addSeparator();
+
+        JMenuItem uusiPeliJaVoitot = new JMenuItem("Aloita peli alusta ja nollaa voitot", KeyEvent.VK_F5);
+        uusiPeliJaVoitot.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
+        uusiPeliJaVoitot.setActionCommand("UUSIPELIJAVOITOT");
+        uusiPeliJaVoitot.addActionListener(new Kuuntelija(this, this.peli));
+        menu.add(uusiPeliJaVoitot);
         menu.addSeparator();
 
         JMenuItem lopeta = new JMenuItem("Lopeta", KeyEvent.VK_F1);
@@ -129,6 +137,7 @@ public class UI implements Runnable {
     public void paivitaVoitto() {
 
         String pelaaja = peli.getPelivuorossa();
+        String uusiRivi = System.lineSeparator();
 
         if (peli.loppuikoTasapeliin()) {
             JOptionPane.showMessageDialog(null, "Peli loppui tasapeliin." + uusiRivi + "Ristin voitot: " + peli.getRistinVoitot() + ". Nollan voitot: " + peli.getNollanVoitot() + ".", "Tasapeli!", JOptionPane.INFORMATION_MESSAGE);
@@ -151,6 +160,7 @@ public class UI implements Runnable {
                 peli.uusiPeli();
                 nollaaPelilauta();
             } else {
+                JOptionPane.showMessageDialog(null, "Kiitos pelaamisesta.", "Näkemiin", JOptionPane.INFORMATION_MESSAGE);
                 System.exit(0);
             }
         }
