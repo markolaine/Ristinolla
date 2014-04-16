@@ -51,7 +51,7 @@ public class UI implements Runnable {
         menu.getAccessibleContext().setAccessibleDescription("Menu");
         menuBar.add(menu);
 
-        JMenuItem uusiPeli = new JMenuItem("Aloita alusta", KeyEvent.VK_F4);
+        JMenuItem uusiPeli = new JMenuItem("Aloita peli alusta", KeyEvent.VK_F4);
         uusiPeli.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0));
         uusiPeli.setActionCommand("UUSIPELI");
         uusiPeli.addActionListener(new Kuuntelija(this, this.peli));
@@ -121,7 +121,8 @@ public class UI implements Runnable {
         paivitaVoitto();
         if ("X".equals(peli.getPelivuorossa())) {
             this.pelivuorossa.setText("Pelivuorossa: 0");
-        } else { this.pelivuorossa.setText("Pelivuorossa: X");
+        } else {
+            this.pelivuorossa.setText("Pelivuorossa: X");
         }
     }
 
@@ -129,11 +130,11 @@ public class UI implements Runnable {
 
         String pelaaja = peli.getPelivuorossa();
 
-        if (peli.tasapeli == true) {
+        if (peli.loppuikoTasapeliin()) {
             JOptionPane.showMessageDialog(null, "Peli loppui tasapeliin." + uusiRivi + "Ristin voitot: " + peli.getRistinVoitot() + ". Nollan voitot: " + peli.getNollanVoitot() + ".", "Tasapeli!", JOptionPane.INFORMATION_MESSAGE);
         }
 
-        if (peli.pelaajaVoitti == true) {
+        if (peli.loppuikoVoittoon()) {
 
             if ("X".equals(pelaaja)) {
                 JOptionPane.showMessageDialog(null, "Ristiä pelannut voitti." + uusiRivi + uusiRivi + "Ristin voitot: " + peli.getRistinVoitot() + ". Nollan voitot: " + peli.getNollanVoitot() + ".", "Risti voitti!", JOptionPane.INFORMATION_MESSAGE);
@@ -141,9 +142,10 @@ public class UI implements Runnable {
             if ("0".equals(pelaaja)) {
                 JOptionPane.showMessageDialog(null, "Nollaa pelannut voitti." + uusiRivi + uusiRivi + "Ristin voitot: " + peli.getRistinVoitot() + ". Nollan voitot: " + peli.getNollanVoitot() + ".", "Nolla voitti!", JOptionPane.INFORMATION_MESSAGE);
             }
+
         }
 
-        if (peli.tasapeli || peli.pelaajaVoitti) {
+        if (peli.loppuiko()) {
 
             if (pelataankoLisaa()) {
                 peli.uusiPeli();
@@ -151,7 +153,6 @@ public class UI implements Runnable {
             } else {
                 System.exit(0);
             }
-
         }
 
     }

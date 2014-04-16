@@ -149,17 +149,35 @@ public class LogiikkaTest {
         Assert.assertEquals(null, testipeli.getRuudunMerkki(ruutu2));
 
     }
-    
 
     @Test
-    public void voittojenResetointiToimii() {
-        
-        testipeli.kasvataVoittoja("X");
-        testipeli.kasvataVoittoja("0");
-        
+    public void voittojenResetointiToimiiRistit() {
+
+        testipeli.asetaMerkkiRuutuun(0);
+        testipeli.asetaMerkkiRuutuun(1);
+        testipeli.asetaMerkkiRuutuun(3);
+        testipeli.asetaMerkkiRuutuun(4);
+        testipeli.asetaMerkkiRuutuun(6);
+        testipeli.tarkistaLoppuiko();
+
         testipeli.resetoiVoitot();
-        
+
         Assert.assertEquals(0, testipeli.getRistinVoitot());
+    }
+
+    @Test
+    public void voittojenResetointiToimiiNollat() {
+
+        testipeli.asetaMerkkiRuutuun(0);
+        testipeli.asetaMerkkiRuutuun(1);
+        testipeli.asetaMerkkiRuutuun(3);
+        testipeli.asetaMerkkiRuutuun(4);
+        testipeli.asetaMerkkiRuutuun(2);
+        testipeli.asetaMerkkiRuutuun(7);
+        testipeli.tarkistaLoppuiko();
+
+        testipeli.resetoiVoitot();
+
         Assert.assertEquals(0, testipeli.getNollanVoitot());
     }
 }

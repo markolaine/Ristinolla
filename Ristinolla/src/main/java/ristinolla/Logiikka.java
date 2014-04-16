@@ -12,8 +12,8 @@ public final class Logiikka {
     private int ristinVoitot;
     private int nollanVoitot;
     public boolean tasapeli;
-    public boolean pelaajaVoitti;
-    public String voittaja;
+    private boolean pelaajaVoitti;
+    private String voittaja;
 
     public Logiikka() {
 
@@ -29,20 +29,20 @@ public final class Logiikka {
     public void uusiPeli() {
 
         for (int i = 0; i < pelialusta.length; i++) {
-            pelialusta[i] = null;
+            this.pelialusta[i] = null;
         }
 
-        pelivuoro = 0;
-        tasapeli = false;
-        pelaajaVoitti = false;
-        voittaja = null;
+        this.pelivuoro = 0;
+        this.tasapeli = false;
+        this.pelaajaVoitti = false;
+        this.voittaja = null;
 
     }
-    
+
     public void resetoiVoitot() {
-        
-        ristinVoitot = 0;
-        nollanVoitot = 0;
+
+        this.ristinVoitot = 0;
+        this.nollanVoitot = 0;
     }
 
     /**
@@ -53,20 +53,19 @@ public final class Logiikka {
      * @param i
      */
     public void asetaMerkkiRuutuun(int i) {
-        
-        pelivuoro++;
 
-        if (pelialusta[i] != null) {
+        this.pelivuoro++;
+
+        if (this.pelialusta[i] != null) {
             throw new IllegalArgumentException("Ruutu on jo pelattu.");
         }
-        
+
         if ("X".equals(getPelivuorossa())) {
-            
-            pelialusta[i] = "X";
+
+            this.pelialusta[i] = "X";
         } else if ("0".equals(getPelivuorossa())) {
-            pelialusta[i] = "0";
+            this.pelialusta[i] = "0";
         }
-        
 
     }
 
@@ -74,16 +73,16 @@ public final class Logiikka {
 
         voittikoPelaaja();
 
-        if (voittaja != null) {
+        if (this.voittaja != null) {
 
-            pelaajaVoitti = true;
+            this.pelaajaVoitti = true;
 
-            kasvataVoittoja(getPelivuorossa());
+            kasvataVoittoja(this.getPelivuorossa());
 
         }
-        
-            if (tulikoTasapeli()) {
-            tasapeli = true;
+
+        if (loppuikoTasapeliin()) {
+            this.tasapeli = true;
         }
 
     }
@@ -95,10 +94,20 @@ public final class Logiikka {
      *
      * @return
      */
-    public boolean tulikoTasapeli() {
+    public boolean loppuikoTasapeliin() {
 
-        return (voittaja == null) && pelivuoro == pelialusta.length;
+        return (this.voittaja == null) && this.pelivuoro == this.pelialusta.length;
 
+    }
+
+    public boolean loppuikoVoittoon() {
+
+        return this.voittaja != null;
+    }
+    
+    public boolean loppuiko() {
+        
+        return loppuikoTasapeliin() || loppuikoVoittoon();
     }
 
     /**
@@ -109,48 +118,56 @@ public final class Logiikka {
      */
     public void voittikoPelaaja() {
 
-        if (pelivuoro >= 5) {
+        if (this.pelivuoro >= 5) {
 
             for (int i = 0; i < 3; i++) {
 
-                if (pelialusta[i] != null) {
-                    String verrattava = pelialusta[i];
-                    if (verrattava.equals(pelialusta[i + 3]) && verrattava.equals(pelialusta[i + 6])) {
+                if (this.pelialusta[i] != null) {
+                    String verrattava = this.pelialusta[i];
+                    if (verrattava.equals(this.pelialusta[i + 3]) && verrattava.equals(this.pelialusta[i + 6])) {
 
-                        voittaja = verrattava;
+                        this.voittaja = verrattava;
                     }
                 }
             }
 
             for (int i = 0; i < 9; i += 3) {
 
-                if (pelialusta[i] != null) {
-                    String verrattava = pelialusta[i];
-                    if (verrattava.equals(pelialusta[i + 1]) && verrattava.equals(pelialusta[i + 2])) {
+                if (this.pelialusta[i] != null) {
+                    String verrattava = this.pelialusta[i];
+                    if (verrattava.equals(this.pelialusta[i + 1]) && verrattava.equals(this.pelialusta[i + 2])) {
 
-                        voittaja = verrattava;
+                        this.voittaja = verrattava;
                     }
                 }
             }
 
-            if (pelialusta[0] != null) {
-                String verrattava = pelialusta[0];
-                if (verrattava.equals(pelialusta[4]) && verrattava.equals(pelialusta[8])) {
+            if (this.pelialusta[0] != null) {
+                String verrattava = this.pelialusta[0];
+                if (verrattava.equals(this.pelialusta[4]) && verrattava.equals(this.pelialusta[8])) {
 
-                    voittaja = verrattava;
+                    this.voittaja = verrattava;
                 }
             }
 
-            if (pelialusta[2] != null) {
-                String verrattava = pelialusta[2];
-                if (verrattava.equals(pelialusta[4]) && verrattava.equals(pelialusta[6])) {
+            if (this.pelialusta[2] != null) {
+                String verrattava = this.pelialusta[2];
+                if (verrattava.equals(this.pelialusta[4]) && verrattava.equals(this.pelialusta[6])) {
 
-                    voittaja = verrattava;
+                    this.voittaja = verrattava;
                 }
             }
 
         }
 
+    }
+
+    private void kasvataVoittoja(String pelivuorossa) {
+        if ("X".equals(pelivuorossa)) {
+            this.ristinVoitot++;
+        } else if ("0".equals(pelivuorossa)) {
+            this.nollanVoitot++;
+        }
     }
 
     /**
@@ -160,7 +177,7 @@ public final class Logiikka {
      */
     public int getRistinVoitot() {
 
-        return ristinVoitot;
+        return this.ristinVoitot;
     }
 
     /**
@@ -170,12 +187,12 @@ public final class Logiikka {
      */
     public int getNollanVoitot() {
 
-        return nollanVoitot;
+        return this.nollanVoitot;
     }
 
     public String getPelivuorossa() {
 
-        if (pelivuoro % 2 != 0) {
+        if (this.pelivuoro % 2 != 0) {
 
             return "X";
         }
@@ -185,19 +202,12 @@ public final class Logiikka {
 
     public String getRuudunMerkki(int ruutu) {
 
-        return pelialusta[ruutu];
-    }
-    
-    public int getPelivuoro() {
-        
-        return pelivuoro;
+        return this.pelialusta[ruutu];
     }
 
-    public void kasvataVoittoja(String pelivuorossa) {
-        if ("X".equals(pelivuorossa)) {
-            ristinVoitot++;
-        } else if ("0".equals(pelivuorossa)) {
-            nollanVoitot++;
-        }
+    public int getPelivuoro() {
+
+        return this.pelivuoro;
     }
+
 }
