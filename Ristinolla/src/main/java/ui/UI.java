@@ -9,9 +9,9 @@ import ristinolla.Logiikka;
 /**
  *
  * @author marlai
- * 
+ *
  * Luo pelille graafisen käyttöliittymänäkymän ja päivittää sitä pelin edetessä.
- * 
+ *
  */
 public class UI implements Runnable {
 
@@ -20,6 +20,7 @@ public class UI implements Runnable {
     private JButton[] ruudut;
     private JPanel pelilauta;
     private JLabel pelivuorossa;
+    private final String uusiRivi = System.lineSeparator();
 
     /**
      *
@@ -29,7 +30,7 @@ public class UI implements Runnable {
      */
     public UI(Logiikka peli) {
 
-        JOptionPane.showMessageDialog(null, "Kahden pelaajan ristinolla, x aloittaa!", "Ristinolla", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Kahden pelaajan ristinolla, pelaajat X ja 0." + uusiRivi + uusiRivi + "X aloittaa!", "Ristinolla", JOptionPane.INFORMATION_MESSAGE);
 
         this.peli = peli;
         UI.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -140,7 +141,6 @@ public class UI implements Runnable {
     public void paivitaVoitto() {
 
         String pelaaja = peli.getPelivuorossa();
-        String uusiRivi = System.lineSeparator();
 
         if (peli.loppuikoTasapeliin()) {
             JOptionPane.showMessageDialog(null, "Peli loppui tasapeliin." + uusiRivi + "Ristin voitot: " + peli.getRistinVoitot() + ". Nollan voitot: " + peli.getNollanVoitot() + ".", "Tasapeli!", JOptionPane.INFORMATION_MESSAGE);
