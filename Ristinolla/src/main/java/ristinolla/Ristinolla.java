@@ -6,6 +6,9 @@ import javax.swing.*;
 /**
  *
  * @author markolai@cs
+ * 
+ * Luo ristinollapelille logiikan ja käyttää sitä UI-luokassa.
+ * 
  */
 public class Ristinolla {
 

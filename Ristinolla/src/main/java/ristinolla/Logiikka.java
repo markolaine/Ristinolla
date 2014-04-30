@@ -3,11 +3,19 @@ package ristinolla;
 /**
  *
  * @author markolai@cs
+ *
+ * Luo pelialustan, asettaa sille valitun merkin, tarkistaa loppuiko peli ja
+ * kumpi pelaaja voitti vai tuliko tasapeli. Pitää kirjaa pelivuorosta ja
+ * voittojen määrästä sekä kasvattaa voittoja tarvittaessa.
+ *
  */
 public final class Logiikka {
 
     private final String[] pelialusta;
-
+    /**
+     * pelivuoro-laskuri, joka pitää kirjaa pelatuista vuoroista yhtä peliä
+     * kohden.
+     */
     private int pelivuoro;
     private int ristinVoitot;
     private int nollanVoitot;
@@ -22,7 +30,7 @@ public final class Logiikka {
 
     /**
      *
-     * Alustetaan pelilauta ja apumuuttujat uutta peliä varten.
+     * Alustaa pelilaudan ja apumuuttujat uutta peliä varten.
      *
      */
     public void uusiPeli() {
@@ -37,6 +45,11 @@ public final class Logiikka {
 
     }
 
+    /**
+     *
+     * Alustaa voitot nollaksi.
+     *
+     */
     public void resetoiVoitot() {
 
         this.ristinVoitot = 0;
@@ -45,10 +58,10 @@ public final class Logiikka {
 
     /**
      *
-     * Kasvatetaan laskuria ja asetetaan ruutuun vuorossa olevan pelaajan risti
-     * tai nolla pelimerkki.
+     * Kasvatetaan pelivuorolaskuria ja asetetaan ruutuun vuorossa olevan
+     * pelaajan pelimerkki, jos ruutu on tyhjä.
      *
-     * @param i
+     * @param i kertoo mihin ruutuun merkki asetetaan
      */
     public void asetaMerkkiRuutuun(int i) {
 
@@ -67,6 +80,12 @@ public final class Logiikka {
 
     }
 
+    /**
+     *
+     * Tarkistaa onko peli loppunut, ja kasvattaa voittoja tai asettaa pelin
+     * päättyneeksi tasapeliin.
+     *
+     */
     public void tarkistaLoppuiko() {
 
         voittikoPelaaja();
@@ -85,10 +104,10 @@ public final class Logiikka {
 
     /**
      *
-     * Tarkistetaan onko peli loppunut tasapeliin pelialustan täytyttyä ennen
+     * Tarkistaa onko peli loppunut tasapeliin pelialustan täytyttyä ennen
      * kummankaan voittoa.
      *
-     * @return
+     * @return palauttaa tasapelin totuusarvon
      */
     public boolean loppuikoTasapeliin() {
 
@@ -96,11 +115,23 @@ public final class Logiikka {
 
     }
 
+    /**
+     *
+     * Tarkistaa onko peli loppunut voittoon.
+     *
+     * @return palauttaa voiton totuusarvon
+     */
     public boolean loppuikoVoittoon() {
 
         return this.voittaja != null;
     }
 
+    /**
+     *
+     * Tarkistaa onko peli loppunut tasapeliin tai voittoon.
+     *
+     * @return palauttaa totuusarvon, joka kertoo onko peli loppunut
+     */
     public boolean loppuiko() {
 
         return loppuikoTasapeliin() || loppuikoVoittoon();
@@ -108,7 +139,7 @@ public final class Logiikka {
 
     /**
      *
-     * Tarkistetaan onko kumpikaan pelaajista voittanut peliä viimeisimmällä
+     * Tarkistaa onko kumpikaan pelaajista voittanut peliä viimeisimmällä
      * siirrollaan.
      *
      */
@@ -158,6 +189,12 @@ public final class Logiikka {
 
     }
 
+    /**
+     *
+     * Kasvattaa voittaneen pelaajan voittojen määrää
+     *
+     * @param pelivuorossa kertoo pelivuorossa olevan pelaajan
+     */
     private void kasvataVoittoja(String pelivuorossa) {
         if ("X".equals(pelivuorossa)) {
             this.ristinVoitot++;
@@ -167,9 +204,10 @@ public final class Logiikka {
     }
 
     /**
-     * Palautetaan ristiä pelaavan pelaajan voittojen määrä.
      *
-     * @return
+     * Palauttaa ristiä pelaavan pelaajan voittojen määrä.
+     *
+     * @return palauttaa ristin voitot
      */
     public int getRistinVoitot() {
 
@@ -177,15 +215,22 @@ public final class Logiikka {
     }
 
     /**
-     * Palautetaan nollaa pelaavan pelaajan voittojen määrä.
      *
-     * @return
+     * Palauttaa nollaa pelaavan pelaajan voittojen määrä.
+     *
+     * @return palauttaa nollan voitot
      */
     public int getNollanVoitot() {
 
         return this.nollanVoitot;
     }
 
+    /**
+     *
+     * Palautetaan pelivuorossa olevan pelaajan merkki.
+     *
+     * @return palauttaa pelivuorossa olevan pelaajan merkin
+     */
     public String getPelivuorossa() {
 
         if (this.pelivuoro % 2 != 0) {
@@ -196,11 +241,24 @@ public final class Logiikka {
 
     }
 
+    /**
+     *
+     * Palautetaan halutun ruudun merkki.
+     *
+     * @param ruutu kertoo halutun ruudun
+     * @return palauttaa halutun ruudun merkin
+     */
     public String getRuudunMerkki(int ruutu) {
 
         return this.pelialusta[ruutu];
     }
 
+    /**
+     *
+     * Palautetaan pelivuoro-laskurin arvo.
+     *
+     * @return palauttaa pelivuoro-laskurin arvon
+     */
     public int getPelivuoro() {
 
         return this.pelivuoro;

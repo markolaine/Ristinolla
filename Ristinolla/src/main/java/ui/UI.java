@@ -9,6 +9,9 @@ import ristinolla.Logiikka;
 /**
  *
  * @author marlai
+ * 
+ * Luo pelille graafisen käyttöliittymänäkymän ja päivittää sitä pelin edetessä.
+ * 
  */
 public class UI implements Runnable {
 
@@ -22,7 +25,7 @@ public class UI implements Runnable {
      *
      * Graafisen käyttöliittymän asetukset kuntoon.
      *
-     * @param peli
+     * @param peli on käynnissä oleva peli-logiikka
      */
     public UI(Logiikka peli) {
 
@@ -171,8 +174,8 @@ public class UI implements Runnable {
      *
      * Maalataan valittu ruutu ja estetään klikkaaminen uudestaan.
      *
-     * @param ruutu
-     * @param merkki
+     * @param ruutu on kyseessä oleva ruutu
+     * @param merkki on siihen asetettu pelimerkki
      */
     public void maalaaRuutu(JButton ruutu, String merkki) {
 
@@ -191,7 +194,7 @@ public class UI implements Runnable {
      *
      * Kysytäänkö käyttäjältä pelataanko lisää.
      *
-     * @return
+     * @return palauttaa totuusarvona haluaako pelaaja jatkaa pelaamista
      */
     public boolean pelataankoLisaa() {
 
