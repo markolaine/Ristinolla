@@ -12,18 +12,20 @@ Kaikkien käyttäjien toiminnot:
 
 Pelin käynnistäminen
 Pelaaminen
-Uuden pelin aloitus
+Käynnissä olevan pelin uudelleenaloitus
+Käynnissä olevan pelin uudelleenaloitus ja voittojen nollaus
 Lopetus
 
 Pelaajan toiminnot:
 
 Pelin käynnistäminen
 Ristin tai nollan sijoittaminen pelilaudalle
-Uuden pelin aloitus
+Uuden pelin aloitus / voittojen nollaus
 Pelin lopetus
 
 Pelin toiminnot:
 
 Ilmoitus pelin päättymisestä voittoon tai tasapeliin
 Laskuri kummankin pelaajan voitoille
+Pelivuorossa olevan pelaajan ilmoittaminen
 Pelin päätyttyä jatketaan pelaamista tai lopetetaan

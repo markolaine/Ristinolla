@@ -12,18 +12,29 @@ Kaikkien käyttäjien toiminnot:
 
 Pelin käynnistäminen
 Pelaaminen
-Uuden pelin aloitus
+Käynnissä olevan pelin uudelleenaloitus
+Käynnissä olevan pelin uudelleenaloitus ja voittojen nollaus
 Lopetus
 
 Pelaajan toiminnot:
 
 Pelin käynnistäminen
 Ristin tai nollan sijoittaminen pelilaudalle
-Uuden pelin aloitus
+Uuden pelin aloitus / voittojen nollaus
 Pelin lopetus
 
 Pelin toiminnot:
 
 Ilmoitus pelin päättymisestä voittoon tai tasapeliin
 Laskuri kummankin pelaajan voitoille
+Pelivuorossa olevan pelaajan ilmoittaminen
 Pelin päätyttyä jatketaan pelaamista tai lopetetaan
+
+
+Rakenne:
+
+Logiikka pitää String Arrayssä kirjaa pelatuista merkeistä logiikan toimintaa varten. UI hakee tietoa ruutunäkymän päivitystä varten logiikan toiminnallisuuksista. Logiikka tietää aina kumpi pelaaja on vuorossa, ja pitää kirjaa voitoista. Luokka osaa myös kertoa jatkuuko peli yhtä vai onko se päättynyt tasapeliin tai jommankumman pelaajan voittoon.
+
+Kuuntelija-luokka kertoo mihin ruutuun käyttäjä haluaa sijoittaa oman pelimerkkinsä. Kertoo myös jos käyttäjä on valinnut Menusta jonkin kohteen.
+
+Ristinolla-luokka vain potkaisee pelin käyntiin luomalla logiikan ja käyttämällä sitä UI-luokassa.
