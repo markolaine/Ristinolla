@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import ristinolla.Logiikka;
 
 /**
@@ -38,6 +39,7 @@ public class Kuuntelija implements ActionListener {
             this.peli.resetoiVoitot();
             this.ui.nollaaPelilauta();
         } else if (komento.equals("LOPETA")) {
+            JOptionPane.showMessageDialog(null, "Kiitos pelaamisesta.", "Näkemiin", JOptionPane.INFORMATION_MESSAGE);
             System.exit(0);
         } else {
 
