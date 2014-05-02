@@ -1,0 +1,19 @@
+﻿Käyttöohjeet
+
+Peli alkaa klikkaamalla OK, ja ensimmäisenä vuorossa on X-merkkiä pelaava pelaaja.
+
+Ensimmäisen valitun ruudun jälkeen vuoro siirtyy 0-merkkiä pelaavalle pelaajalle. Näin jatketaan, kunnes jompi kumpi saa 3 omaa merkkiään peräkkäin joko vaaka- tai pystysuoraan tai vinosti kulmasta kulmaan.
+
+Ensimmäisenä kolme merkkiä vierekkäin saanut voittaa pelin.
+
+Pelin päätyttyä voittojen määrät kerrotaan, ja pelaajat päättävät haluavatko jatkaa pelaamista.
+
+Käynnissä olevan pelin voi milloin vain kesken pelaamista alustaa uudestaan alusta alkavaksi valitsemalla Menusta "Aloita pelia alusta" tai painamalla F4.
+
+Pelin voi alustaa alusta alkavaksi ja samalla nollata voitot valitsemalla "Aloita peli alusta ja nollaa voitot" tai painamalla F5.
+
+Pelin voi lopettaa Menusta valitsemalla "Lopeta", painamalla F1 tai sulkemalla ikkunan.
+
+Pelivuorossa olevan pelaajan voi tarkistaa peliruudun alareunassa olevasta tietokentästä.
+
+Hyviä pelihetkiä!
